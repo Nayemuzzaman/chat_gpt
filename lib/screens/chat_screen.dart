@@ -1,5 +1,6 @@
 import 'package:chat_gpt/constants/constants.dart';
 import 'package:chat_gpt/services/assets_manager.dart';
+import 'package:chat_gpt/widgets/chat_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -30,10 +31,14 @@ class _ChatScreenState extends State<ChatScreen> {
           padding: const EdgeInsets.all(8.0),
           child: Image.asset(AssetsManager.openailogo),
         ),
-        title: const Text("ChatGPT"), actions: [
+        title: const Text("ChatGPT"),
+        actions: [
           IconButton(
-            onPressed: () {}, 
-            icon: const Icon(Icons.send, color: Colors.white,))
+              onPressed: () {},
+              icon: const Icon(
+                Icons.send,
+                color: Colors.white,
+              ))
         ],
       ),
       body: SafeArea(
@@ -43,7 +48,10 @@ class _ChatScreenState extends State<ChatScreen> {
             child: ListView.builder(
                 itemCount: 6,
                 itemBuilder: (context, index) {
-                  return const Text("Hello this is a text");
+                  return ChatWidget(
+                    msg: chatMessages[index]["msg"].toString(),
+                    chatIndex: int.parse(chatMessages[index]["chatIndex"].toString()),
+                  );
                 }),
           ),
           if (_isTyping) ...[
@@ -51,7 +59,9 @@ class _ChatScreenState extends State<ChatScreen> {
               color: Colors.white,
               size: 18,
             ),
-            SizedBox(height: 15,),
+            SizedBox(
+              height: 15,
+            ),
             Material(
               color: cardColor,
               child: Padding(
@@ -61,18 +71,21 @@ class _ChatScreenState extends State<ChatScreen> {
                     Expanded(
                       child: TextField(
                         style: const TextStyle(color: Colors.white),
-                       controller: textEditingController,
-                       onSubmitted: (value) {
-                        // send message
-                       },
-                       decoration: const InputDecoration.collapsed(
-                         hintText: "How can i helo you",
-                         hintStyle: TextStyle(color: Colors.grey)),
+                        controller: textEditingController,
+                        onSubmitted: (value) {
+                          // send message
+                        },
+                        decoration: const InputDecoration.collapsed(
+                            hintText: "How can i helo you",
+                            hintStyle: TextStyle(color: Colors.grey)),
                       ),
                     ),
-                    IconButton(onPressed: () {
-                      
-                    }, icon: const Icon(Icons.send, color: Colors.white,))
+                    IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.send,
+                          color: Colors.white,
+                        ))
                   ],
                 ),
               ),
