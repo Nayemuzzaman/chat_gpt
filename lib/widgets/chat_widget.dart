@@ -36,7 +36,7 @@ class ChatWidget extends StatelessWidget {
                   child: TextWidget(
                     label: msg,),
                 ),
-                                chatIndex == 0
+                chatIndex == 0
                     ? const SizedBox.shrink()
                     : Row(
                         mainAxisAlignment: MainAxisAlignment.end,

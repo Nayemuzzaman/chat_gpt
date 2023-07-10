@@ -1,6 +1,8 @@
 import 'package:chat_gpt/constants/constants.dart';
 import 'package:chat_gpt/services/assets_manager.dart';
+import 'package:chat_gpt/services/services.dart';
 import 'package:chat_gpt/widgets/chat_widget.dart';
+import 'package:chat_gpt/widgets/text_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -34,9 +36,11 @@ class _ChatScreenState extends State<ChatScreen> {
         title: const Text("ChatGPT"),
         actions: [
           IconButton(
-              onPressed: () {},
+              onPressed: () async {
+                await Services.showModelSheet(context: context);
+              },
               icon: const Icon(
-                Icons.send,
+                Icons.more_vert_rounded,
                 color: Colors.white,
               ))
         ],
@@ -50,7 +54,8 @@ class _ChatScreenState extends State<ChatScreen> {
                 itemBuilder: (context, index) {
                   return ChatWidget(
                     msg: chatMessages[index]["msg"].toString(),
-                    chatIndex: int.parse(chatMessages[index]["chatIndex"].toString()),
+                    chatIndex:
+                        int.parse(chatMessages[index]["chatIndex"].toString()),
                   );
                 }),
           ),
