@@ -1,6 +1,9 @@
 import 'package:chat_gpt/constants/constants.dart';
+import 'package:chat_gpt/providers/chat_provider.dart';
+import 'package:chat_gpt/providers/models_provider.dart';
 import 'package:chat_gpt/screens/chat_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,17 +15,25 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-      
-        scaffoldBackgroundColor: scaffoldBackgroundColor,
-        appBarTheme: AppBarTheme(
-          color: cardColor,
-        )
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => ModelsProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ChatProvider(),
+        ),
+      ],
+      child: MaterialApp(
+        title: 'Flutter ChatBOT',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+            scaffoldBackgroundColor: scaffoldBackgroundColor,
+            appBarTheme: AppBarTheme(
+              color: cardColor,
+            )),
+        home: const ChatScreen(),
       ),
-      home: const ChatScreen(),
     );
   }
 }
